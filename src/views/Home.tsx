@@ -1,6 +1,4 @@
- import { useNavigate } from 'react-router-dom';
-import * as PokemonApi from '../lib/pokeWrapper';
-import {Fragment, useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { Card, Form, InputGroup, Button } from 'react-bootstrap';
 import UserType from '../types/auth';
 import { getPokemon } from '../lib/apiWrapper';
@@ -12,10 +10,24 @@ type HomeProps = {
 
 }
 
+const INITIAL_VALUES = {
+  name: '',
+  types: [],
+  weight: 0,
+  height: 0,
+  sprites: {
+      other: {
+          "official-artwork": {
+              front_default: 'string'
+          }
+      }
+  }
+}
+
 export default function Home({  }: HomeProps) {
 
   const [pokemon, setPokemon] = useState('');
-  const [pokemonResults, setPokmonResults] = useState<Pokemon[]>([]);
+  const [pokemonResults, setPokmonResults] = useState<Pokemon| undefined>(INITIAL_VALUES);
 
     
     
@@ -45,9 +57,9 @@ export default function Home({  }: HomeProps) {
 
         const response = await getPokemon(pokemon);
 
-        console.log({response});
+        console.log('response',response);
 
-      setPokmonResults(response)
+        setPokmonResults(response)
       }
 
       searchPokemon();
@@ -65,19 +77,19 @@ export default function Home({  }: HomeProps) {
             </InputGroup>
           {/* <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm" size="lg" value={pokemon} onChange={(event) => setPokemon(event.target.value)} /> */}
 
-          {pokemonResults.map((pokemon, index) => (
-        <Fragment key={index}>
+          {/* {pokemonResults.map((pokemon, index) => ( */}
+        {/* <> */}
           <Card>
-              <Card.Img variant='top' src={pokemon?.sprites?.other['official-artwork']?.front_default}></Card.Img>
+              <Card.Img variant='top' src={pokemonResults?.sprites?.other['official-artwork']?.front_default}></Card.Img>
               <Card.Body>
-                <Card.Title>{pokemon.name}</Card.Title>
-                {/* <Card.Text>{pokemon?.types[0]?.type?.name}</Card.Text> */}
-                <Card.Text>{pokemon?.weight}</Card.Text>
-                <Card.Text>{pokemon?.height}</Card.Text>
+                <Card.Title>{pokemonResults?.name}</Card.Title>
+                <Card.Text>Type: {pokemonResults?.types[0]?.type?.name}</Card.Text>
+                <Card.Text>Weight: {pokemonResults?.weight}lbs</Card.Text>
+                <Card.Text>Height: {pokemonResults?.height}"</Card.Text>
               </Card.Body>
           </Card>
-        </Fragment>
-      ))}
+        {/* </> */}
+      {/* ))} */}
 
           </>
 

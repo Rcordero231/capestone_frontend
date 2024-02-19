@@ -11,13 +11,11 @@ const tokenEndpoint: string = '/token';
 
 const getPokemon = async (name: string) => {
     try {
-        const response = await api.get<Pokemon[]>("/pokemon/" + name);
-        
+        const response = await api.get<Pokemon>("/pokemon/" + name);
+        console.log('response', response);
         if(response.status === 200) {
-            //@ts-ignore
         return response.data;
         }
-        return []
     } catch (error) {
         console.error('There was an error fetching the pokemon:', error);
         throw error;
