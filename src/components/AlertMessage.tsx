@@ -1,6 +1,8 @@
 import Alert from 'react-bootstrap/Alert';
 import CategoryType from '../types/category';
 
+
+
 type AlertProps = {
     category: CategoryType,
     message: string|null,

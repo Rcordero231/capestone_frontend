@@ -1,11 +1,39 @@
 import axios from 'axios';
 import UserType from '../types/auth';
+import { Pokemon, PokemonPage } from '../types/pokemon';
+import api from "./pokeWrapper"
 
-
-// const base: string = 'https://kekambas-125-api.onrender.com/api';
 const base: string = 'http://127.0.0.1:5000';
 const userEndpoint: string = '/users';
 const tokenEndpoint: string = '/token';
+
+
+
+const getPokemon = async (name: string) => {
+    try {
+        const response = await api.get<Pokemon[]>("/pokemon/" + name);
+        
+        if(response.status === 200) {
+            //@ts-ignore
+        return response.data;
+        }
+        return []
+    } catch (error) {
+        console.error('There was an error fetching the pokemon:', error);
+        throw error;
+    }
+};
+
+const getPokemonPage = async (page: number) => {
+    const pageSize = 12;
+    try {
+        const response = await api.get<PokemonPage>(`/pokemon?limit=${pageSize}&offset=${pageSize * (page - 1)}`);
+        return response.data;
+    } catch(error) {
+        console.error('Error with getting PokePage: ', error);
+        throw error;
+    }
+}
 
 
 const apiClientNoAuth = () => axios.create({
@@ -69,11 +97,11 @@ async function login(username:string, password:string): Promise<APIResponse<Toke
     return {error, data}
 }
 
-async function getMe(token:string): Promise<APIResponse<UserType>> {
+async function getMe(token: string): Promise<APIResponse<UserType>> {
     let error;
     let data;
     try{
-        const response = await apiClientTokenAuth(token).get(userEndpoint + '/me');
+        const response = await apiClientTokenAuth(token).get(userEndpoint+"/me");
         data = response.data
     } catch(err) {
         if (axios.isAxiosError(err)){
@@ -85,10 +113,44 @@ async function getMe(token:string): Promise<APIResponse<UserType>> {
     return {error, data}
 }
 
+async function editUserId(token:string, editedUserData:Partial<UserType>): Promise<APIResponse<UserType>> {
+    let error;
+    let data;
+    try{
+        const response = await apiClientTokenAuth(token).put(userEndpoint, editedUserData);
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { error, data }
+}
 
+async function deleteUserId(token:string): Promise<APIResponse<string>> {
+    let error;
+    let data;
+    try{
+        const response = await apiClientTokenAuth(token).delete(userEndpoint);
+        data = response.data.success
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { error, data }
+}
 
 export {
     register,
     login,
-    getMe
+    getMe,
+    editUserId,
+    deleteUserId,
+    getPokemon,
+    getPokemonPage
 }

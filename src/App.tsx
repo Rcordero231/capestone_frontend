@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
+import EditUser from './views/EditUser';
 // Import Components
 import AlertMessage from './components/AlertMessage';
 import Navigation from "./components/Navigation";
@@ -72,9 +73,10 @@ export default function App() {
             <Container>
                 {message && <AlertMessage category={category!} message={message} flashMessage={flashMessage} />}
                 <Routes>
-                    <Route path='/' element={<Home     isLoggedIn={isLoggedIn} user={loggedInUser} flashMessage={flashMessage} />} />
-                    <Route path='/login' element={<Login isLoggedIn={isLoggedIn} logUserIn={logUserIn} flashMessage={flashMessage} />} />
+                    <Route path='/' element={<Home isLoggedIn={isLoggedIn} user={loggedInUser}/>} />
+                    <Route path='/login' element={<Login logUserIn={logUserIn} flashMessage={flashMessage} />} />
                     <Route path='/register' element={<Register logUserIn={logUserIn} flashMessage={flashMessage} />} />
+                    <Route path='/edituser' element={<EditUser isLoggedIn={isLoggedIn} user={loggedInUser} logUserOut={logUserOut} flashMessage={flashMessage} />} />
                 </Routes>
             </Container>
         </div>
