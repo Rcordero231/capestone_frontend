@@ -1,16 +1,9 @@
-import * as PokemonApi from '../lib/pokeWrapper'
-import { Card } from 'react-bootstrap'
+import React from 'react'
 
 type Props = {}
 
-export default function Pokecard({ }: Props) {
-
-    const pokemonName = router
-
-
+export default function PokeCard({ }: Props) {
     return (
-        <Card>
-            PAS
-        </Card>
+        <div>PokeCard</div>
     )
 }
