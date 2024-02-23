@@ -6,6 +6,9 @@ import UserType from '../types/auth';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import { Container } from 'react-bootstrap';
+import '../styles/EditUser.css'
+
 
 type EditUserProps = {
     isLoggedIn: boolean,
@@ -71,8 +74,9 @@ export default function EditUser({ user, flashMessage, logUserOut }: EditUserPro
 
     return (
         <>
+        <Container className='edit-user-container'>
             <h1 className="text-center">User Profile</h1>
-            <Card>
+            <Card className='edit-user-card'>
                 <Card.Body>
                     <Form onSubmit={handleFormSubmit}>
                         <Form.Label>Username</Form.Label>
@@ -84,6 +88,7 @@ export default function EditUser({ user, flashMessage, logUserOut }: EditUserPro
                     </Form>
                 </Card.Body>
             </Card>
+        </Container>
         </>
     )
 }

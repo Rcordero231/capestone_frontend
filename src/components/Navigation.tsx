@@ -13,7 +13,7 @@ export default function Navigation({ isLoggedIn, handleClick }:NavigationProps) 
     return (
         <Navbar bg='dark' data-bs-theme='dark'>
             <Container>
-                <Navbar.Brand as={Link} to='/'>AniViewer</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>PokeDex</Navbar.Brand>
                 <Nav className='me-auto'>
                     { isLoggedIn ? (
                         <>

@@ -14,6 +14,7 @@ import CategoryType from './types/category';
 import UserType from './types/auth';
 // Import apiWrapper functions
 import { getMe } from './lib/apiWrapper';
+import './App.css';
 
 
 export default function App() {
@@ -68,7 +69,7 @@ export default function App() {
     }
 
     return (
-        <div>
+        <div className='app-background'>
             <Navigation isLoggedIn={isLoggedIn} handleClick={logUserOut} />
             <Container>
                 {message && <AlertMessage category={category!} message={message} flashMessage={flashMessage} />}

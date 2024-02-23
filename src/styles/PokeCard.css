@@ -1,0 +1,7 @@
+.poke-card {
+    background: url('../images/pokeball.png')
+    no-repeat center center, linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    background-size: 110% auto, cover; /* Adjust as needed */
+    background-position: center top, center center;
+    background-blend-mode: overlay;
+}

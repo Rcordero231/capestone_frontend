@@ -1,0 +1,18 @@
+.edit-user-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-user-card {
+    background: url('../images/rotom.png')
+    no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 800px;
+    height: 350px;
+}
