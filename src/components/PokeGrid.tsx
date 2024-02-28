@@ -34,7 +34,7 @@ export default function PokemonGrid() {
         setTriggerFetch(oldValue => oldValue + 1);
     };
 
-    // Call loadMore once at the start to fetch the first 20 Pokemon
+
     useEffect(() => {
         loadMore();
     }, []);

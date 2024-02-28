@@ -36,7 +36,7 @@ export default function Login({ flashMessage, logUserIn }: LoginProps) {
             let userResponse = await getMe(response.data?.token as string)
             logUserIn(userResponse.data!)
             flashMessage('You have successfully logged in', 'success')
-            navigate('/edit/' + userResponse.data?.id)
+            navigate('/')
         }
     }
 
